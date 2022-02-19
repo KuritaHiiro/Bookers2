@@ -1,0 +1,13 @@
+<h1>Editing Book</h1>
+<!--バリデーションの記述-->
+
+<!--編集フォームの記述-->
+<%= form_with model: @book, url: book_path(@book.id), method: :patch, local: true do |f| %>
+  <p>Title</p>
+  <%= f.text_field :title %>
+  
+  <p>Opinion</p>
+  <%= f.text_area :body %>
+  
+  <div class="btn"><%= f.submit "Update Book" %></div>
+<% end %>

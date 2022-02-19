@@ -20,4 +20,10 @@ class UsersController < ApplicationController
   def edit 
     @user = User.find(params[:id])
   end
+  
+  private
+  
+  def book_params
+    params.require(:book).permit(:title, :introduction, :profile_image)
+  end
 end
