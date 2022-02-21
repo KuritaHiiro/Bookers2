@@ -12,6 +12,8 @@ class UsersController < ApplicationController
     if @book.save
       redirect_to book_path(@book.id)
     else
+      @book = User.all
+      @user = current_user
       render :index
     end
   end
