@@ -2,14 +2,18 @@ class UsersController < ApplicationController
   def index
     @users = User.all
     @book = Book.new
-    @user = @user.user
+    @user = current_user
+
   end
 
   def create
     @book = Book.new(book_params)
     @book.user_id = current_user.id
-    @book.save
-    redirect_to book_path(@book.id)
+    if @book.save
+      redirect_to book_path(@book.id)
+    else
+      render :index
+    end
   end
 
   def show
@@ -35,6 +39,6 @@ class UsersController < ApplicationController
   private
 
   def user_params
-    params.require(:user).permit(:title, :introduction, :profile_image)
+    params.require(:user).permit(:name, :introduction, :profile_image)
   end
 end
