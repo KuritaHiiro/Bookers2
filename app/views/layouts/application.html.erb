@@ -12,6 +12,9 @@
 
   <body>
     <header>
+      <% flash.each do |key, value| %>
+        <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
       <li><%= link_to "Bookers","/" %></li>
       <% if user_signed_in? %>
         <li>
