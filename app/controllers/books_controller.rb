@@ -14,11 +14,12 @@ class BooksController < ApplicationController
     else
       @books = Book.all
       @user = current_user
-      render :index
+      render :indexー
     end
   end
 
   def show
+    @new_book = Book.new
     @book = Book.find(params[:id])
     @user = @book.user
   end
