@@ -22,6 +22,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     @books = @user.books
     @book = Book.new
+    @post_image = @user.post_images.page(params[:id])
   end
 
   def edit
