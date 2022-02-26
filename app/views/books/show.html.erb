@@ -1,4 +1,4 @@
-<p class="flash"><%= flash[:notice] %></p>
+<p class="flash text-success"><%= flash[:notice] %></p>
 <div class="container">
   <div class="row">
     <div class="col-md-3"><%= render 'books/left', user: @user, book: @new_book %></div>
@@ -8,14 +8,16 @@
         <tbody>
           <tr>
             <td>
-              <%= image_tag @user.get_profile_image(50, 50) %><br>
-              <%= @book.user.name %>
+              <%= link_to user_path(@user.id) do %>
+              <%= image_tag @book.user.get_profile_image(50, 50) %>
+              <% end %><br>
+              <%= link_to @book.user.name, user_path(@user.id) %>
             </td>
             <td><%= link_to @book.title, book_path(@book.id) %></td>
             <td><%= @book.body %></td>
             <% if @book.user == current_user %>
-              <td><%= link_to "Edit", edit_book_path %></td>
-              <td><%= link_to "Destroy", book_path(@book), method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
+              <td><%= link_to "Edit", edit_book_path, class: "btn btn-success" %></td>
+              <td><%= link_to "Destroy", book_path(@book),class: "btn btn-danger", method: :delete, "data-confirm" => "本当に削除しますか？" %></td>
             <% end %>
           </tr>
         </tbody>

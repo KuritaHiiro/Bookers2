@@ -1,44 +1,29 @@
-<% if @book.errors.any? %>
-  <%= @book.errors.count %>errors prohibited this obj from being saved:
-  <ul>
-   <% @book.errors.full_messages.each do |message| %>
-     <li><%= message %></li>
-   <% end %>
-  </ul>
-<% end %>
-
 <div class="container">
   <div class="row">
      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
         <h1>Editing Book</h1>
+        <% if @book.errors.any? %>
+          <h3 class="text-danger"><%= @book.errors.count %>errors prohibited this obj from being saved:</h3>
+          <ul>
+            <% @book.errors.full_messages.each do |message| %>
+              <li class="text-danger"><%= message %></li>
+            <% end %>
+          </ul>
+        <% end %>
         <%= form_with model: @book, url: book_path(@book.id), method: :patch, local: true do |f| %>
         <div class="form-group">
           <label for="title">Title</label>
-          <input class="form-control title" type="text" name="title" id="book">
+          <%= f.text_field :title, class:"form-control title" %>
         </div>
         <div class="form-group">
           <label for="body">Opinion</label>
-          <textarea class="form-control body" name="body" id="body"></textarea>
+          <%= f.text_area :body, class:"form-control body" %>
         </div>
         <div class="form-group">
-          <input type="submit" name="commit" value="Update Book" class="btn btn-success" data-disable-with="Update Book">
+          <%= f.submit "Update Book", class:"btn btn-success" %>
         </div>
         <% end %>
         <%= link_to "Show", book_path(@book.id) %> | <%= link_to "Back", books_path %>
      </div>
   </div>
 </div>
-
-<h1>Editing Book</h1>
-
-<!--編集フォームの記述-->
-<%= form_with model: @book, url: book_path(@book.id), method: :patch, local: true do |f| %>
-  <p>Title</p>
-  <%= f.text_field :title %>
-
-  <p>Opinion</p>
-  <%= f.text_area :body %>
-
-  <div class="btn"><%= f.submit "Update Book" %></div>
-<% end %>
-2
